@@ -3,15 +3,7 @@
 
 import sys, csv, re
 import pandas as pd
-from os import listdir, system
-from os.path import isfile, join
-import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-
-path_soft_transfic='/home/giumar/soft/transfic/bin/transf_scores.pl' ### add choose to path  
-#filename_out= path_project+'%s_data' %(dataset)
-#fileout=open(filename_out,'w')	
 #############################################################################################
 path_fathmm=all_fathhmm_sorted
 path_go=prova_50000'		
@@ -112,7 +104,7 @@ def unique(data):
 	data1=data[(data['variants_count']==data['min_value'])]   # & (data['info']=='POOLED')]
 	data1['unique']=np.where((data1['Gene_multiple']>1)&(data1['info']=='POOLED'),1,np.where(data1['Gene_multiple']==1,1,np.where(data1['Gene_multiple']==data1['Gene_Info_multiple'],1,0)))
 	data2=data1[data1['unique']==1]
-#	data2=data2.drop(['variants_count','Gene_multiple','Gene_Info_multiple','min_value','unique'],axis=1)
+	data2=data2.drop(['variants_count','Gene_multiple','Gene_Info_multiple','min_value','unique'],axis=1)
 	return data2
 
 
