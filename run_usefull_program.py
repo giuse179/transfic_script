@@ -13,8 +13,8 @@ path_soft_transfic='transf_scores.pl' ### add choose to path
 path_soft_fathmm='fathmm.py' ### add choose to path
 
 def run_VEP_1000genome(path_soft,path_VEP):
-  path_dataset='/1000genomes/1000_bedfile_VEP/'  ### add argv choose
-	path_outfile='/1000genomes/VEP_result/'
+  path_dataset='/transfic_project/1000genomes/1000_bedfile_VEP/'  ### add argv choose
+	path_outfile='/transfic_project/1000genomes/VEP_result/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]	
 	for data in list_file:
 		z=re.compile(r"\d+")
@@ -29,8 +29,8 @@ def run_VEP_1000genome(path_soft,path_VEP):
 		else: continue
 
 def transfic_process_cosmic(path_soft):
-	path_dataset='/file_per_transfic/cosmic/' ### add argv choose
-	path_outfile='/transfic_result/cosmic/'
+	path_dataset='/transfic_project/file_per_transfic/cosmic/' ### add argv choose
+	path_outfile='/transfic_project/transfic_result/cosmic/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
@@ -38,8 +38,8 @@ def transfic_process_cosmic(path_soft):
 		print data,'   finished!!!'
 
 def fathmm_process_cosmic(path_soft):
-	path_dataset='/file_per_fathHMM/cosmic/' ### add argv choose
-	path_outfile='/fathHMM_result/cosmic/'
+	path_dataset='/transfic_project/file_per_fathHMM/cosmic/' ### add argv choose
+	path_outfile='/transfic_project/fathHMM_result/cosmic/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
@@ -47,8 +47,8 @@ def fathmm_process_cosmic(path_soft):
 		print data,'....finished!!!'
 
 def fathmm_process_VEP(path_soft):
-	path_dataset='/file_per_fathHMM/VEP/'
-	path_outfile='/fathHMM_result/VEP/'
+	path_dataset='/transfic_project/file_per_fathHMM/VEP/'
+	path_outfile='/transfic_project/fathHMM_result/VEP/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
