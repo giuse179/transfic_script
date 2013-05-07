@@ -9,14 +9,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-path_soft_VEP='/genomics/users/giumar/soft/variant_effect_predictor/variant_effect_predictor.pl' ### add choose to path
-path_VEP='/genomics/users/giumar/soft/variant_effect_predictor/.vep'
-path_soft_transfic='/home/giumar/soft/transfic/bin/transf_scores.pl' ### add choose to path
-path_soft_fathmm='/home/giumar/soft/fathmm-master/cgi-bin/fathmm.py' ### add choose to path
+path_soft_VEP='variant_effect_predictor.pl' ### add choose to path
+path_VEP='/variant_effect_predictor/.vep'
+path_soft_transfic='transf_scores.pl' ### add choose to path
+path_soft_fathmm='fathmm.py' ### add choose to path
 
 #########################################################################################################################
 def bedfile_transform():
-  path_project='/genomics/users/giumar/transfic_project/1000genomes/'
+  path_project='/transfic_project/1000genomes/'
 	list_file=[f for f in listdir(path_project+'original_data/') if isfile(join(path_project+'original_data/',f))]		
 	for dataset in list_file:		
 		filein=path_project+'1000genome_originalDATA/'+dataset		
@@ -34,8 +34,8 @@ def bedfile_transform():
 		print fileout,('...finish!!!')
 ########################################################################################################################
 def run_VEP_1000genome(path_soft,database_VEP): ### bottlenek
-	path_dataset='/genomics/users/giumar/transfic_project/1000genomes/1000_bedfile_VEP/'  ### add argv choose
-	path_outfile='/genomics/users/giumar/transfic_project/1000genomes/VEP_result/'
+	path_dataset='/transfic_project/1000genomes/1000_bedfile_VEP/'  ### add argv choose
+	path_outfile='/transfic_project/1000genomes/VEP_result/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]	
 	for data in list_file:
 		z=re.compile(r"\d+")
@@ -50,8 +50,8 @@ def run_VEP_1000genome(path_soft,database_VEP): ### bottlenek
 		else: continue
 ###########################################################################################################################
 def from_VEP_to_FATHMM_chunk():	
-	path_dataset='/genomics/users/giumar/transfic_project/1000genomes/VEP_result/'  ### add argv choose??????
-	path_outfile='/genomics/users/giumar/transfic_project/file_per_fathHMM/VEP/'
+	path_dataset='/1000genomes/VEP_result/'  ### add argv choose??????
+	path_outfile='/file_per_fathHMM/VEP/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]	
 	#list_file=['snp1_mut_VEP']
 	for dataset in list_file:	
@@ -83,8 +83,8 @@ def from_VEP_to_FATHMM_chunk():
 		fileout.close()
 ##############################################################################################################################
 def fathmm_process_VEP(path_soft):
-	path_dataset='/genomics/users/giumar/transfic_project/file_per_fathHMM/VEP/'
-	path_outfile='/genomics/users/giumar/transfic_project/fathHMM_result/VEP/'
+	path_dataset='/transfic_project/file_per_fathHMM/VEP/'
+	path_outfile='/transfic_project/fathHMM_result/VEP/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
