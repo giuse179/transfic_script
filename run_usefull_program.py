@@ -7,21 +7,21 @@ import sys, csv, re
 from os import listdir, system
 from os.path import isfile, join
 
-path_soft_VEP='/genomics/users/giumar/soft/variant_effect_predictor/variant_effect_predictor.pl' ### add choose to path
-path_VEP='/genomics/users/giumar/soft/variant_effect_predictor/.vep'
-path_soft_transfic='/home/giumar/soft/transfic/bin/transf_scores.pl' ### add choose to path
-path_soft_fathmm='/home/giumar/soft/fathmm-master/cgi-bin/fathmm.py' ### add choose to path
+path_soft_VEP='variant_effect_predictor.pl' ### add choose to path
+path_VEP='/variant_effect_predictor/.vep'
+path_soft_transfic='transf_scores.pl' ### add choose to path
+path_soft_fathmm='fathmm.py' ### add choose to path
 
 def run_VEP_1000genome(path_soft,path_VEP):
-  path_dataset='/genomics/users/giumar/transfic_project/1000genomes/1000_bedfile_VEP/'  ### add argv choose
-	path_outfile='/genomics/users/giumar/transfic_project/1000genomes/VEP_result/'
+  path_dataset='/1000genomes/1000_bedfile_VEP/'  ### add argv choose
+	path_outfile='/1000genomes/VEP_result/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]	
 	for data in list_file:
 		z=re.compile(r"\d+")
 		a=re.search(z,data)
 		if a == None:k='X'
 		else: k=a.group() 						
-		if k =='X' or k=='12' or k=='13': #### aggiunta condizione per dividere il processo per CROMOSOMA in modo da lanciarlo in piu PC
+		if k =='X' or k=='12' or k=='13': 
 			print data,'......start!!!'					
 			system ("perl %s -i %s%s --cache --offline --chr %s --protein --sift=b --polyphen=b --buffer_size 20000 --dir %s -o %s%s_VEP" % (path_soft,path_dataset,data,k,path_VEP,path_outfile,data))
 			print data,'....finished!!!'
@@ -29,8 +29,8 @@ def run_VEP_1000genome(path_soft,path_VEP):
 		else: continue
 
 def transfic_process_cosmic(path_soft):
-	path_dataset='/genomics/users/giumar/transfic_project/file_per_transfic/cosmic/' ### add argv choose
-	path_outfile='/genomics/users/giumar/transfic_project/transfic_result/cosmic/'
+	path_dataset='/file_per_transfic/cosmic/' ### add argv choose
+	path_outfile='/transfic_result/cosmic/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
@@ -38,8 +38,8 @@ def transfic_process_cosmic(path_soft):
 		print data,'   finished!!!'
 
 def fathmm_process_cosmic(path_soft):
-	path_dataset='/genomics/users/giumar/transfic_project/file_per_fathHMM/cosmic/' ### add argv choose
-	path_outfile='/genomics/users/giumar/transfic_project/fathHMM_result/cosmic/'
+	path_dataset='/file_per_fathHMM/cosmic/' ### add argv choose
+	path_outfile='/fathHMM_result/cosmic/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
@@ -47,8 +47,8 @@ def fathmm_process_cosmic(path_soft):
 		print data,'....finished!!!'
 
 def fathmm_process_VEP(path_soft):
-	path_dataset='/genomics/users/giumar/transfic_project/file_per_fathHMM/VEP/'
-	path_outfile='/genomics/users/giumar/transfic_project/fathHMM_result/VEP/'
+	path_dataset='/file_per_fathHMM/VEP/'
+	path_outfile='/fathHMM_result/VEP/'
 	list_file=[f for f in listdir(path_dataset) if isfile(join(path_dataset,f))]
 	for data in list_file:
 		print data,'......start!!!'		
