@@ -5,8 +5,8 @@ import sys, csv, re
 import pandas as pd
 import numpy as np
 #############################################################################################
-path_fathmm=all_fathhmm_sorted_prova10000
-path_go=prova_5000'		
+path_fathmm='all_fathhmm_sorted_prova10000'
+path_go='go_annotation_5000'		
 #########################################################################################################################
 fileout1=open('baseline_tollerance','w')
 ##########################################################################
