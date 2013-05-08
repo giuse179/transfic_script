@@ -127,7 +127,7 @@ if __name__=="__main__":
 	p=matrix(alls)
 	print 'matrix'
 	final_all=unique(p)
-	final_all.to_csv(fileout1,sep='\t',index=True,header=True) #,cols=['GO_Accession','Gene_ID_x','Protein_ID','final_mean','final_std','info']	
+	final_all.to_csv(fileout1,sep='\t',index=True,header=True)
 
 
 
