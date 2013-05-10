@@ -85,20 +85,15 @@ def concatenated(data,all_data):
 def matrix(data):
 	data=data.sort_index(by=['Gene_ID','variants_count'])
 	data=data.drop(['GO_Accession'],axis=1)
-	group=pd.DataFrame(data.groupby(['Gene_ID']).sort_index(by=['Gene_ID','variants_count']))
-	grouped=pd.DataFrame(data.groupby(['Gene_ID']).size(),columns=['Gene_multiple'])
-	grouped2=pd.DataFrame(data.groupby(['Gene_ID','info']).size(),columns=['Gene_Info_multiple'])
-	grouped3=pd.DataFrame(data.groupby(['Gene_ID','info'])['variants_count'].min(),columns=['min_value'],dtype='int64')
-	data1=group.reset_index()
-	data2=grouped.reset_index()
-	data3=grouped2.reset_index()
-	data3_b=grouped3.reset_index()
-	c=pd.merge(data1,data2,on='Gene_ID')
-	data4=pd.merge(c,data3,on=['Gene_ID','info'])
-	data5=pd.merge(data4,data3_b,on=['Gene_ID','info'])
-	data5=data5.drop(['index'],axis=1)
-	data5=data5.set_index('Gene_ID').drop_duplicates()
-	return data5
+	data1=pd.DataFrame(data.groupby(['Gene_ID']).sort_index(by=['Gene_ID','variants_count'])).reset_index()
+	data2=pd.DataFrame(data.groupby(['Gene_ID','Protein_ID']).size(),columns=['Gene_multiple']).reset_index()
+	data3=pd.DataFrame(data.groupby(['Gene_ID','Protein_ID','info']).size(),columns=['Gene_Info_multiple']).reset_index()
+	data3_b=pd.DataFrame(data.groupby(['Gene_ID','Protein_ID','info'])['variants_count'].min(),columns=['min_value'],dtype='int64').reset_index()
+	c=pd.merge(data1,data2,on=['Gene_ID','Protein_ID'])
+	data4=pd.merge(c,data3,on=['Gene_ID','Protein_ID','info'])
+	data4=pd.merge(data4,data3_b,on=['Gene_ID','Protein_ID','info'])
+	data4=data4.drop(['index'],axis=1).set_index('Gene_ID').drop_duplicates()
+	return data4
 
 def unique(data):
 	data1=data[(data['variants_count']==data['min_value'])]   # & (data['info']=='POOLED')]
@@ -127,7 +122,7 @@ if __name__=="__main__":
 	p=matrix(alls)
 	print 'matrix'
 	final_all=unique(p)
-	final_all.to_csv(fileout1,sep='\t',index=True,header=True)
+	final_all.to_csv(fileout1,sep='\t',index=True,header=False)
 
 
 
